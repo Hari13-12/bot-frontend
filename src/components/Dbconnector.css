@@ -1,0 +1,214 @@
+/* dbconnector.css */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #d8e4ff, #f3f4ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.db {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.glass-container-horizontal {
+  display: flex;
+  flex-direction: row;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  width: 90%;
+  max-width: 1200px;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.form-section {
+  flex: 1;
+  padding: 20px;
+}
+
+.glass-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.glass-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.form-group:last-child {
+  margin-right: 0;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #555;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+}
+
+.full-width {
+  flex: 1;
+}
+
+.radio-group {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.radio-group label {
+  font-size: 14px;
+  color: #333;
+}
+
+.radio-group input {
+  margin-right: 5px;
+}
+
+.check-connection-button {
+  background-color: #000;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.check-connection-button:hover {
+  background-color: #333;
+}
+
+.table-section {
+  flex: 1;
+  padding: 20px;
+  overflow: auto;
+}
+
+.connect-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.connect-table th,
+.connect-table td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.connect-table th {
+  background: rgba(255, 255, 255, 0.25);
+  font-size: 16px;
+  color: #333;
+}
+
+.connect-table tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.connect-button {
+  background-color: #000;
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.connect-button:hover {
+  background-color: #333;
+}
+
+.connect-table td button {
+  display: inline-block;
+  margin: auto;
+}
+/* box css */
+.scrollable-box {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  max-height: 400px;
+}
+
+.db-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+
+.db-table th,
+.db-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.db-table .row-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.db-table th:first-child,
+.db-table td:first-child {
+  width: 100%; /* Allocate 70% of the width to the first column */
+}
+
+.db-table th:last-child,
+.db-table td:last-child {
+  width: 5%; /* Allocate 30% of the width to the second column */
+  text-align: center; /* Center-align content in the second column */
+}
+
+.connect-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 3px 8px; /* Smaller button */
+  font-size: 12px; /* Reduced font size */
+  cursor: pointer;
+  border-radius: 4px;
+  display: inline-block;
+  margin: auto; /* Center the button */
+}
