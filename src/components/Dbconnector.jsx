@@ -14,6 +14,8 @@ const Dbconnector = () => {
   });
   const [validationPassed, setValidationPassed] = useState(false);
   const [dbinfo, setDbinfo] = useState([]);
+  const [connectionMsg, setConnectionMsg] = useState("");
+  const [connectionMsgType, setConnectionMsgType] = useState("");
   const navigate = useNavigate();
 
   const tok = Cookies.get("auth_token");
@@ -66,17 +68,20 @@ const Dbconnector = () => {
       const data = await response.json();
 
       if (response.ok && data.valid) {
-        alert("Database info is valid!");
+        setConnectionMsgType("success");
+        setConnectionMsg("Database information is valid. Proceed to connect to the database.");
         setValidationPassed(true);
       } else {
-        alert(data.message || "Validation failed. Please try again.");
+        setConnectionMsgType("error");
+        setConnectionMsg("Database information is invalid!. Please try again.");
         setValidationPassed(false);
-        navigate("/");
+        // navigate("/");
       }
     } catch (error) {
       console.error("Validation error:", error);
-      alert("An error occurred during validation.");
-      navigate("/");
+      setConnectionMsgType("error");
+      setConnectionMsg("Database information is invalid!. Please try again.");
+      // navigate("/");
     }
   };
 
@@ -116,7 +121,7 @@ const Dbconnector = () => {
       const data = await response.json();
 
       if (response.ok && data.message === "Database connected successfully") {
-        alert("Database connected successfully!");
+        // alert("Database connected successfully!");
         navigate("/chatsam");
       } else {
         alert(data.message || "Failed to connect to the database.");
@@ -132,12 +137,11 @@ const Dbconnector = () => {
       <div className="glass-container-horizontal">
         <div className="form-section">
           <form className="glass-form" onSubmit={handleValidate}>
-            <h2><b>Database Connection</b></h2>
+            <h6><b>Database Connection</b></h6>
 
             {/* Input fields */}
             <div className="form-row">
               <div className="form-group">
-                <label>User:</label>
                 <input
                   type="text"
                   name="database_user"
@@ -148,7 +152,6 @@ const Dbconnector = () => {
                 />
               </div>
               <div className="form-group">
-                <label>Password:</label>
                 <input
                   type="password"
                   name="database_password"
@@ -161,7 +164,6 @@ const Dbconnector = () => {
 
             <div className="form-row">
               <div className="form-group">
-                <label>Host:</label>
                 <input
                   type="text"
                   name="database_host"
@@ -172,7 +174,6 @@ const Dbconnector = () => {
                 />
               </div>
               <div className="form-group">
-                <label>Port:</label>
                 <input
                   type="text"
                   name="database_port"
@@ -233,24 +234,27 @@ const Dbconnector = () => {
               </label>
             </fieldset>
 
-            {/* Validate button */}
-            <button type="submit" className="check-connection-button">
-              Check Connection
-            </button>
+            <h6 className={connectionMsgType === "error" ? "error-msg" : "success-msg"}>{connectionMsg}</h6>
+
+            {validationPassed ? (
+              <div className="button-container">
+                <button className="save-button" onClick={handleSave}>
+                  Save
+                </button>
+                <button
+                  className="connect-now-button"
+                  onClick={() => handleSubmit()}
+                >
+                  Connect Now
+                </button>
+              </div>
+            )
+              :
+              <button type="submit" className="check-connection-button">
+                Check Connection
+              </button>}
           </form>
-          {validationPassed && (
-            <div className="button-container">
-              <button className="save-button" onClick={handleSave}>
-                Save
-              </button>
-              <button
-                className="connect-now-button"
-                onClick={() => handleSubmit()}
-              >
-                Connect Now
-              </button>
-            </div>
-          )}
+
         </div>
 
         {/* Scrollable Table */}

@@ -33,11 +33,11 @@ const Chatsam = () => {
         cookie: `auth_token=${tok};refresh_token=""`,
       },
     });
-  
+
     ws.onopen = () => {
       console.log("WebSocket connected!");
     };
-  
+
     ws.onmessage = (event) => {
       console.log("Received message:", event.data);
       setIsLoading(false);
@@ -56,20 +56,20 @@ const Chatsam = () => {
         ]);
       }
     };
-  
+
     ws.onclose = (event) => {
       console.log("WebSocket closed:", event.code, event.reason);
       navigate("/");
-      
+
     };
-  
+
     ws.onerror = (error) => {
       console.error("WebSocket error:", error);
       navigate("/");
     };
-  
+
     setSocket(ws);
-  
+
     return () => {
       if (ws.readyState === WebSocket.OPEN) {
         ws.close();
@@ -98,7 +98,7 @@ const Chatsam = () => {
       setError(err.message); // Set error message
     }
   };
-  
+
 
   const handleSend = () => {
     if (inputValue.trim()) {
@@ -180,21 +180,21 @@ const Chatsam = () => {
   const renderPagination = () => {
     const pageCount = Math.ceil(filteredData.length / rowsPerPage);
     if (pageCount <= 1) return null;
-  
+
     const maxPagesToShow = 10; // Maximum pages to display at once
     const currentChunk = Math.ceil(currentPage / maxPagesToShow); // Current chunk of pages
     const chunkStart = (currentChunk - 1) * maxPagesToShow + 1;
     const chunkEnd = Math.min(chunkStart + maxPagesToShow - 1, pageCount);
-  
+
     const pagesInChunk = Array.from({ length: chunkEnd - chunkStart + 1 }, (_, index) => chunkStart + index);
-  
+
     return (
       <div className="pagination" style={{ marginTop: '10px', display: 'flex', alignItems: 'center' }}>
         {/* Previous Chunk Button */}
         {chunkStart > 1 && (
           <button onClick={() => setCurrentPage(chunkStart - maxPagesToShow)}>Previous</button>
         )}
-  
+
         {/* Page Numbers */}
         {pagesInChunk.map((page) => (
           <button
@@ -205,7 +205,7 @@ const Chatsam = () => {
             {page}
           </button>
         ))}
-  
+
         {/* Next Chunk Button */}
         {chunkEnd < pageCount && (
           <button onClick={() => setCurrentPage(chunkEnd + 1)}>Next</button>
@@ -213,18 +213,18 @@ const Chatsam = () => {
       </div>
     );
   };
-  
+
 
   return (
     <div className="container-fluid">
       <div className="row" style={{ height: '100vh' }}>
-        <div className="col-3 bg-dark" style={{ 
-          height: '100%', 
+        <div className="col-3 bg-dark" style={{
+          height: '100%',
           padding: '20px',
           display: 'flex',
           flexDirection: 'column'
         }}>
-          <div className="chat" style={{ 
+          <div className="chat" style={{
             flexGrow: 1,
             overflowY: 'auto',
             marginBottom: '60px',
@@ -232,39 +232,38 @@ const Chatsam = () => {
             scrollbarColor: '#666 #333'
           }}>
             <div class="left-scroll">
-            {messages.map((msg, index) => (
-              <div key={index}>
-                {msg.sender === 'user' ? (
-                  <div className="human">
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: '10px' }}>
-                      <p style={{ color: 'white', backgroundColor: '#0645f2', padding: '8px 12px', borderRadius: '10px', margin: 0 }}>{msg.text}</p>
-                      <img src={human} alt="Human Logo" width={30} height={30} style={{ marginLeft: '10px', marginRight: '10px' }} />
+              {messages.map((msg, index) => (
+                <div key={index}>
+                  {msg.sender === 'user' ? (
+                    <div className="human">
+                      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: '10px' }}>
+                        <p style={{ color: 'white', backgroundColor: '#0645f2', padding: '8px 12px', borderRadius: '10px', margin: 0 }}>{msg.text}</p>
+                        <img src={human} alt="Human Logo" width={30} height={30} style={{ marginLeft: '10px', marginRight: '10px' }} />
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <div className="bot">
-                    <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '10px' }}>
-                      <img src={chatbot} alt="Bot Logo" width={30} height={30} style={{ marginRight: '10px', marginLeft: '25px' }} />
-                      <p style={{ color: 'white', backgroundColor: '#333', padding: '8px 12px', borderRadius: '10px', margin: 0 }}>
-                        <ReactMarkdown>{msg.text}</ReactMarkdown>
-                      </p>
+                  ) : (
+                    <div className="bot">
+                      <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '10px' }}>
+                        <img src={chatbot} alt="Bot Logo" width={30} height={30} style={{ marginRight: '10px', marginLeft: '25px' }} />
+                        <p style={{ color: 'white', backgroundColor: '#333', padding: '8px 12px', borderRadius: '10px', margin: 0 }}>
+                          <ReactMarkdown>{msg.text}</ReactMarkdown>
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
-            <div ref={chatEndRef} />
+                  )}
+                </div>
+              ))}
+              <div ref={chatEndRef} />
             </div>
           </div>
         </div>
 
-        <div className="col-9 bg-white query-results" style={{ 
-  height: '100%',
-  padding: '20px',
-  display: 'flex',
-  flexDirection: 'column'
+        <div className="col-9 bg-white query-results" style={{
+          height: '100%',
+          padding: '20px',
+          display: 'flex',
+          flexDirection: 'column'
         }}>
-          <h2>Query Results</h2>
 
           {/* Query Display and Copy Button */}
           <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>

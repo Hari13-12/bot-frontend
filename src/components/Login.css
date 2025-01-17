@@ -66,13 +66,13 @@ a {
 }
 
 button {
-	border-radius: 20px !important;
+	border-radius: 100px !important;
 	border: 1px solid white !important;
 	background-color: black !important;
 	color: #FFFFFF !important;
-	font-size: 12px !important;
+	font-size: 10px !important;
 	font-weight: bold !important;
-	padding: 12px 45px !important;
+	padding: 12px 20px !important;
 	letter-spacing: 1px !important;
 	text-transform: uppercase !important;
 	transition: transform 80ms ease-in !important;
